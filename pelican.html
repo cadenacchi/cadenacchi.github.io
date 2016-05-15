@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive &mdash; 一瞬上がった賢さを永続化</title>
+  <title>pelicanによるブログ管理 &mdash; 一瞬上がった賢さを永続化</title>
   <meta name="author" content="cadenacchi">
+
+
 
 
 
@@ -36,7 +38,7 @@
 
 
 <ul class="main-navigation">
-      <li >
+      <li class="active">
         <a href="/category/pelican.html">Pelican</a>
       </li>
       <li >
@@ -46,43 +48,54 @@
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Archive</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">pelicanによるブログ管理</h1>
+    <p class="meta">
+<time datetime="2016-05-15T22:00:00+09:00" pubdate>日 15 5月 2016</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2016</h2>
-                    <article>
-                        <h1><a href="/pelican.html">pelicanによるブログ管理</a></h1>
-                        <time datetime="2016-05-15 22:00:00+09:00" pubdate>
-                            <span class="month">5月</span>
-                            <span class="day">15</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/pelican.html'>Pelican</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="/readable_code.html">readable code</a></h1>
-                        <time datetime="2016-05-15 18:00:00+09:00" pubdate>
-                            <span class="month">5月</span>
-                            <span class="day">15</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='/category/programming.html'>Programming</a>
-                                
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
-    </article>
+  <div class="entry-content"><h2>コンテンツの作成</h2>
+<p><code>content/[記事名.md]</code>を作成してコンテンツを書く</p>
+<h2>html化</h2>
+<div class="highlight"><pre><span></span>make html
+</pre></div>
+
+
+<h2>ローカルでプレビュー</h2>
+<div class="highlight"><pre><span></span>make serve
+</pre></div>
+
+
+<h2>GitHubにあげるディレクトリを指定する</h2>
+<div class="highlight"><pre><span></span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span>
+</pre></div>
+
+
+<p>pelicanはoutputにhtmlを吐き出してくれるので、上記のように指定<br />
+<code>gh-pages</code>ブランチができている</p>
+<h2>github.ioに公開</h2>
+<div class="highlight"><pre><span></span>git push -f origin gh-pages:master
+</pre></div>
+
+
+<p><code>gh-pages</code>ブランチを<code>master</code>ブランチにpushして記事を公開する</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        Cadenacchi
+    </span>
+  </span>
+<time datetime="2016-05-15T22:00:00+09:00" pubdate>日 15 5月 2016</time>  <span class="categories">
+    <a class='category' href='/category/pelican.html'>Pelican</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="/tag/pelican.html">pelican</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
 </div>
 <aside class="sidebar">
   <section>

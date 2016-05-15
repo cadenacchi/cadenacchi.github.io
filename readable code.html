@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>readable code &mdash; 一瞬上がった賢さを永続化</title>
+  <meta name="author" content="cadenacchi">
+
+
+
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/favicon.png" rel="icon">
+
+  <link href="/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">一瞬上がった賢さを永続化</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<ul class="main-navigation">
+      <li >
+        <a href="/category/pelican.html">Pelican</a>
+      </li>
+      <li class="active">
+        <a href="/category/programming.html">Programming</a>
+      </li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">readable code</h1>
+    <p class="meta">
+<time datetime="2016-05-15T18:00:00+09:00" pubdate>日 15 5月 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><h2>名前に情報を詰め込む</h2>
+<h4>抽象的ではなく具体的な名前を使う</h4>
+<div class="highlight"><pre><span></span># getだと、どこからpageをとってくるかわからない
+def get_page(): 
+    pass
+
+# インターネットからとってくるならdownloadにすべき
+def download_page():
+    pass
+</pre></div>
+
+
+<h4>名前に情報を追加する</h4>
+<p>変数の意味を間違ってしまったときにバグが起こる場合は情報を追加したほうがよい</p>
+<p>htmlのコードをutf-8に変えた
+html ⇒ html_utf8</p>
+<h4>名前の長さを決める</h4>
+<ul>
+<li>スコープが小さければ短い名前でもよい</li>
+<li>プロジェクト固有の省略形はやめる</li>
+<li>常識的な省略形はOK（例: stringのかわりにstrはOK）</li>
+<li>不要な単語を捨てる(例: ConvertToString() ⇒ ToString())</li>
+</ul>
+<h4>名前のフォーマットで情報を伝える</h4>
+<p>エンティティごとにことなるフォーマットを用意することで、名前から理解を深められる</p>
+<ul>
+<li>クラス名はCamelCase</li>
+<li>変数名はlower_separated</li>
+</ul>
+<h2>誤解されない名前</h2>
+<h4>限界値を含めるときは<code>min_*</code>と<code>max_*</code>を使う</h4>
+<h4>範囲を指定するときは<code>first</code>と<code>last</code>を使う</h4>
+<p><code>start</code>,<code>stop</code>では終わりが曖昧</p>
+<h4>包含/排他的範囲には<code>begin</code>と<code>end</code>を使う</h4>
+<h4>ブール値の変数名には、<code>is</code>・<code>has</code>・<code>can</code>・<code>should</code>をつける</h4>
+<h4>プログラマの期待に合わせる</h4>
+<p>例えば<code>get*()</code>は軽量アクセサであるという期待がある</p>
+<h2>美しさ</h2>
+<p>TODO</p>
+<h2>コメントすべきことを知る</h2>
+<p>TODO</p>
+<h2>コメントは正確に</h2>
+<p>TODO</p>
+<h2>制御フローは読みやすく</h2>
+<h4>if/else ブロックの並び順</h4>
+<ul>
+<li>条件は否定形よりも肯定形を使う</li>
+<li>関心を引く条件は先にかく</li>
+</ul>
+<h4>do/whileループを避ける</h4>
+<h4>ネストは浅くする</h4>
+<ul>
+<li>早期リターン</li>
+<li>ループ内部のネストを削除する</li>
+</ul>
+<div class="highlight"><pre><span></span># 変更前
+for i in range(n):
+    if results[i]:
+        non_null_count += 1
+        if results[i][&#39;name&#39;] == &quot;&quot;
+            pass
+
+# 変更後
+for i in range(n):
+    if not results[i]:
+        continue
+    non_null_count += 1
+    if results[i][&#39;name&#39;] == &quot;&quot;
+        pass
+</pre></div>
+
+
+<h2>巨大な式を分割する</h2>
+<h4>説明変数</h4>
+<p>可読性のために式の意味を表す変数を用意しておく</p>
+<div class="highlight"><pre><span></span># 変更前
+if line.split(&#39;:&#39;)[0].strip() == &quot;root&quot;:
+    pass
+
+# 変更後
+user = line.split(&#39;:&#39;)[0].strip()
+if user == &quot;root&quot;:
+    pass
+</pre></div>
+
+
+<h4>要約変数</h4>
+<p>何度も使う式は要約しておく</p>
+<h2>変数と読みやすさ</h2>
+<p>TODO</p>
+<h2>無関係の下位問題を抽出する</h2>
+<ul>
+<li>関数を見て、「このコードの高レベルの目標は何か」と自問する</li>
+<li>コードの各行に対して「高レベルの目標に直接的に効果があるのか」と自問する</li>
+<li>無関係の下位問題を解決しているコードが相当量あれば、それらを抽出して別の関数にする</li>
+</ul>
+<h2>一度に１つのことを</h2>
+<p>TODO</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        Cadenacchi
+    </span>
+  </span>
+<time datetime="2016-05-15T18:00:00+09:00" pubdate>日 15 5月 2016</time>  <span class="categories">
+    <a class='category' href='/category/programming.html'>programming</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="/tag/programming.html">programming</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="/readable code.html">readable code</a>
+      </li>
+      <li class="post">
+          <a href="/first-post.html">最初のPelicanブログ</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="/category/pelican.html">Pelican</a></li>
+        <li><a href="/category/programming.html">programming</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="/tag/pelican.html">pelican</a>,    <a href="/tag/programming.html">programming</a>  </section>
+
+
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2014&ndash;2016  cadenacchi &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="/theme/js/modernizr-2.0.js"></script>
+  <script src="/theme/js/ender.js"></script>
+  <script src="/theme/js/octopress.js" type="text/javascript"></script>
+</body>
+</html>
